@@ -107,6 +107,7 @@ BaseCache::BaseCache(const BaseCacheParams &p, unsigned blk_size)
       forwardSnoops(true),
       clusivity(p.clusivity),
       isReadOnly(p.is_read_only),
+      isDestructiveCache(p.is_destructive_cache),
       replaceExpansions(p.replace_expansions),
       moveContractions(p.move_contractions),
       blocked(0),
@@ -1217,6 +1218,11 @@ BaseCache::satisfyRequest(PacketPtr pkt, CacheBlk *blk, bool, bool)
         // all read responses have a data payload
         assert(pkt->hasRespData());
         pkt->setDataFromBlock(blk->data, blkSize);
+
+        if (pkt->req->isDestructive() && isDestructiveCache) {
+            // invalidateBlock(blk);
+            stats.destructiveReads++;
+        }
     } else if (pkt->isUpgrade()) {
         // sanity check
         assert(!pkt->hasSharers());
@@ -2332,6 +2338,8 @@ BaseCache::CacheStats::CacheStats(BaseCache &c)
              "average overall mshr uncacheable latency"),
     ADD_STAT(replacements, statistics::units::Count::get(),
              "number of replacements"),
+    ADD_STAT(destructiveReads, statistics::units::Count::get(),
+             "number of destructive reads"),
     ADD_STAT(dataExpansions, statistics::units::Count::get(),
              "number of data expansions"),
     ADD_STAT(dataContractions, statistics::units::Count::get(),

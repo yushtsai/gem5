@@ -784,6 +784,8 @@ class BaseCPU : public ClockedObject
         statistics::Scalar numBranches;
         /* Stat for total number of executed load instructions */
         statistics::Scalar numLoadInsts;
+        /* Stat for destructive read markers (added for Path A) */
+        statistics::Scalar destructiveReadMarkers;
         /* Number of executed store instructions */
         statistics::Formula numStoreInsts;
         /* Number of instructions executed per cycle */

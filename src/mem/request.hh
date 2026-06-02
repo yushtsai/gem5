@@ -161,6 +161,9 @@ class Request : public Extensible<Request>
         /** This request is a read which will be followed by a write. */
         READ_MODIFY_WRITE           = 0x0020000000000000,
 
+        /** This request is a destructive read (e.g. for FeRAM). */
+        DESTRUCTIVE_READ            = 0x0040000000000000,
+
         /** The request is a prefetch. */
         PREFETCH                    = 0x01000000,
         /** The request should be prefetched into the exclusive state. */
@@ -751,6 +754,9 @@ class Request : public Extensible<Request>
     {
         return _localAccessor(tc, pkt);
     }
+
+    bool isDestructive() const { return _flags.isSet(DESTRUCTIVE_READ); }
+    void setDestructive() { _flags.set(DESTRUCTIVE_READ); }
 
     /**
      * Accessor for atomic-op functor.

@@ -944,6 +944,9 @@ class BaseCache : public ClockedObject
      */
     const bool isReadOnly;
 
+    /** Whether this cache responds to destructive read requests. */
+    const bool isDestructiveCache;
+
     /**
      * when a data expansion of a compressed block happens it will not be
      * able to co-allocate where it is at anymore. If true, the replacement
@@ -1134,6 +1137,8 @@ class BaseCache : public ClockedObject
 
         /** Number of replacements of valid blocks. */
         statistics::Scalar replacements;
+        /** Number of destructive reads. */
+        statistics::Scalar destructiveReads;
 
         /** Number of data expansions. */
         statistics::Scalar dataExpansions;

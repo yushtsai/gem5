@@ -1333,6 +1333,14 @@ decode QUADRANT default Unknown::unknown() {
             }
         }
 
+        0x02: decode FUNCT3 {
+            format Load {
+                0x3: ld_dr({{
+                    Rd_sd = Mem_sd;
+                }}, mem_flags=[DESTRUCTIVE_READ]);
+            }
+        }
+
         0x03: decode FUNCT3 {
             format FenceOp {
                 0x0: fence({{

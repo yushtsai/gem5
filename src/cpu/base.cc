@@ -940,6 +940,8 @@ ExecuteCPUStats::ExecuteCPUStats(statistics::Group *parent, int thread_id)
              "Number of branches executed"),
     ADD_STAT(numLoadInsts, statistics::units::Count::get(),
              "Number of load instructions executed"),
+    ADD_STAT(destructiveReadMarkers, statistics::units::Count::get(),
+             "Number of destructive read markers executed"),
     ADD_STAT(numStoreInsts, statistics::units::Count::get(),
              "Number of stores executed"),
     ADD_STAT(instRate, statistics::units::Rate<

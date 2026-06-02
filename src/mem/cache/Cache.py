@@ -105,6 +105,8 @@ class BaseCache(ClockedObject):
 
     is_read_only = Param.Bool(False, "Is this cache read only (e.g. inst)")
 
+    is_destructive_cache = Param.Bool(True, "Whether to respond to destructive read requests")
+
     prefetcher = Param.BasePrefetcher(NULL, "Prefetcher attached to cache")
 
     tags = Param.BaseTags(BaseSetAssoc(), "Tag store")

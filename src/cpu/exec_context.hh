@@ -229,6 +229,8 @@ class ExecContext
     virtual AddressMonitor *getAddrMonitor() = 0;
 
     /** @} */
+
+    virtual void destructiveReadMarker() {}
 };
 
 } // namespace gem5

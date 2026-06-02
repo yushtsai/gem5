@@ -448,6 +448,12 @@ class SimpleExecContext : public ExecContext
     {
         return cpu->getCpuAddrMonitor(thread->threadId());
     }
+
+    void
+    destructiveReadMarker() override
+    {
+        cpu->executeStats[thread->threadId()]->destructiveReadMarkers++;
+    }
 };
 
 } // namespace gem5
