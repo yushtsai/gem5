@@ -73,7 +73,7 @@ from ruby import Ruby
 
 ## --- yupoo add
 class L1ICache(Cache):
-    size = '16KiB'
+    size = '32KiB'
     assoc = 8
     tag_latency = 1
     data_latency = 1
@@ -83,7 +83,7 @@ class L1ICache(Cache):
     writeback_clean = False
 
 class L1DCache(Cache):
-    size = '16KiB'
+    size = '8KiB'
     assoc = 8
     tag_latency = 1
     data_latency = 1
