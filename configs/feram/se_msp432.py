@@ -21,7 +21,7 @@ from m5.util import (
 
 from gem5.isas import ISA
 
-addToPath("../../")
+addToPath("../")
 
 from common import (
     CacheConfig,
